@@ -24,7 +24,7 @@ scale = Vector2( 0.0916905, 2.90909 )
 shape = SubResource( 1 )
 
 [node name="Player" type="KinematicBody2D" parent="."]
-position = Vector2( 505, 273 )
+position = Vector2( 495.465, 50.5128 )
 script = ExtResource( 2 )
 playerGravity = 588.6
 
