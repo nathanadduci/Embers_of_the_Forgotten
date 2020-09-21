@@ -26,7 +26,8 @@ shape = SubResource( 1 )
 [node name="Player" type="KinematicBody2D" parent="."]
 position = Vector2( 495.465, 50.5128 )
 script = ExtResource( 2 )
-playerGravity = 588.6
+playerGravity = 588.0
+playerSpeed = 600
 
 [node name="Player Collision" type="CollisionShape2D" parent="Player"]
 position = Vector2( 0, 0.420441 )

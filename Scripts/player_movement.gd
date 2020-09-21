@@ -12,19 +12,21 @@ var playerDistance
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	playerVelocity.y = playerGravity
 
 
 # Called every phys frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	
-	# obtain new y velocity
+	# obtain new y velocity and check crouch
 	if is_on_floor():
 		playerVelocity.y = playerGravity
+		if Input.is_action_pressed("ui_down"):
+			print("is crouched")
 	else:
 		if playerVelocity.y < terminalVelocity:
 			playerVelocity.y += delta * playerGravity 
-			if Input.is_action_pressed("ui_down"):
+			if Input.is_action_pressed("ui_down") && playerVelocity.y < terminalVelocity:
 				playerVelocity.y += 50
 		else: 
 			playerVelocity.y = terminalVelocity
@@ -41,9 +43,15 @@ func _physics_process(delta):
 func _inputSequence():
 	
 	if Input.is_action_pressed("ui_right") && !Input.is_action_pressed("ui_left"):
-		playerVelocity.x = playerSpeed
+		if playerVelocity.x < playerSpeed:
+			playerVelocity.x += (playerSpeed / 10)
+		else:
+			playerVelocity.x = playerSpeed
 	elif Input.is_action_pressed("ui_left") && !Input.is_action_pressed("ui_right"):
-		playerVelocity.x = -playerSpeed
+		if playerVelocity.x > -playerSpeed:
+			playerVelocity.x -= (playerSpeed / 10)
+		else:
+			playerVelocity.x = -playerSpeed
 	else:
 		if playerVelocity.x > 1 || playerVelocity.x < -1:
 			playerVelocity.x = playerVelocity.x / floatDenominator
