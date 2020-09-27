@@ -52,8 +52,16 @@ func _inputSequence():
 			playerVelocity.x -= (playerSpeed / 10)
 		else:
 			playerVelocity.x = -playerSpeed
+	elif Input.is_mouse_button_pressed(BUTTON_LEFT):
+		shoot()
 	else:
 		if playerVelocity.x > 1 || playerVelocity.x < -1:
 			playerVelocity.x = playerVelocity.x / floatDenominator
 		else:
 			playerVelocity.x = 0
+
+# Shoot a projectile
+func shoot():
+	var projectile = load("res://projectile.tscn")
+	var p = projectile.instance() #The actual projectile object in the scene.
+	add_child_below_node(get_tree().get_current_scene(), p)
