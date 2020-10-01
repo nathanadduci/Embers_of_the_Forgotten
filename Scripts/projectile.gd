@@ -9,4 +9,7 @@ func _ready():
 
 func _physics_process(delta):
 	move_and_slide(velocity)
-	print_debug(get_tree().get_root().get_pos())
+	#print(position.y)
+	if position.x < -1000:
+		queue_free()
+

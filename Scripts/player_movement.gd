@@ -8,6 +8,7 @@ export var terminalVelocity = 1500
 export var floatDenominator = 1.3
 var playerVelocity = Vector2()
 var playerDistance
+var lastShot = OS.get_ticks_msec()
 
 
 # Called when the node enters the scene tree for the first time.
@@ -62,6 +63,9 @@ func _inputSequence():
 
 # Shoot a projectile
 func shoot():
-	var projectile = load("res://projectile.tscn")
-	var p = projectile.instance() #The actual projectile object in the scene.
-	add_child_below_node(get_tree().get_current_scene(), p)
+	if (OS.get_ticks_msec() - lastShot) > 500:
+		var projectile = load("res://projectile.tscn")
+		var p = projectile.instance() #The actual projectile object in the scene.
+		add_child_below_node(get_tree().get_current_scene(), p)
+		lastShot = OS.get_ticks_msec()
+	
